@@ -1,0 +1,16 @@
+{
+  "name": "react-rails-api-jwt",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hraynaud/react-rails-api-jwt",
+  "authors": [
+    "hraynaud <herby.raynaud@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
