@@ -1,0 +1,23 @@
+{
+  "name": "react-rails-api-jwt",
+  "version": "1.0.0",
+  "description": "== README",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.1"
+  }
+}
