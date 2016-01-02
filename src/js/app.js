@@ -1,2 +1,2 @@
-var h = 1000;
-console.log(h);
+var Parent = require('./jsx/parent');
+React.render(<Parent />, document.getElementById('app'));
