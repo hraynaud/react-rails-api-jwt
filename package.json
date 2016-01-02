@@ -37,6 +37,7 @@
     "watchify": "^3.6.1"
   },
   "devDependencies": {
-    "glob": "^6.0.3"
+    "glob": "^6.0.3",
+    "gulp-streamify": "^1.0.2"
   }
 }
