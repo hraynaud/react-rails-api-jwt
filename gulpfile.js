@@ -8,53 +8,53 @@ var reactify = require('reactify');  // Transforms React JSX to JS
 var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
 var concat = require('gulp-concat'); //Concatenates files
 var lint = require('gulp-eslint'); //Lint JS files, including JSX
+var glob = require('glob');
+
+var srcRoot = './src';
 
 var config = {
-  port: 9005,
-  devBaseUrl: 'http://localhost',
   paths: {
-    html: './src/*.html',
-    js: './src/**/*.js',
-    sassPaths = [
-      'bower_components/foundation-sites/scss',
-    ];
-
-    dist: './public',
-    mainJs: './src/main.js'
+    html: srcRoot +'/*.html',
+    js: srcRoot + '/**/*.js',
+    jsx: srcRoot + '/jsx/**/*.jsx',
+    css: srcRoot + '/**/*.css',
+    sass: srcRoot + '/**/*.scss',
+    vendor: { 
+      css: [
+        'bower_components/foundation-sites/dist/foundation.min.css',
+      ],
+      js: [],
+    },
+    dist: './dist',
+    appJs: srcRoot+ "/js/app.js" 
   }
 }
 
-//Start a local development server
-//gulp.task('connect', function() {
-  //connect.server({
-    //root: ['dist'],
-    //port: config.port,
-    //base: config.devBaseUrl,
-    //livereload: true
-  //});
-//});
 
-//gulp.task('open', ['connect'], function() {
-  //gulp.src('dist/index.html')
-  //.pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/'}));
-//});
-//
-var 
-// Foundation SASS...
-gulp.task('sass', function() {
-  return gulp.src('./scss/app.scss')
-    .pipe($.sass({
-      includePaths: sassPaths
-    })
-      .on('error', $.sass.logError))
-    .pipe($.autoprefixer({
-      browsers: ['last 2 versions', 'ie >= 9']
-    }))
-    //.pipe(cssmin())
-    //.pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./css'));
+
+gulp.task('jsx', function() {
+  var files = glob.sync(config.paths.jsx);
+  browserify({entries: files})
+  .transform(reactify)
+  .bundle()
+  .pipe(source('components.js'))
+  .pipe(gulp.dest(config.paths.dist + '/js'))
 });
 
+gulp.task('appjs', function() {
+  browserify(config.paths.appJs)
+  .bundle()
+  .on('error', console.error.bind(console))
+  .pipe(source('bundle.js'))
+  .pipe(gulp.dest(config.paths.dist + '/js'))
+});
+
+
+gulp.task('css', function() {
+  gulp.src(config.paths.vendor.css)
+  .pipe(concat('bundle.css'))
+  .pipe(gulp.dest(config.paths.dist + '/css'));
+});
 
 
 gulp.task('html', function() {
@@ -63,21 +63,9 @@ gulp.task('html', function() {
   .pipe(connect.reload());
 });
 
-gulp.task('js', function() {
-  browserify(config.paths.mainJs)
-  .transform(reactify)
-  .bundle()
-  .on('error', console.error.bind(console))
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest(config.paths.dist + '/scripts'))
-  .pipe(connect.reload());
-});
 
-gulp.task('css', function() {
-  gulp.src(config.paths.css)
-  .pipe(concat('bundle.css'))
-  .pipe(gulp.dest(config.paths.dist + '/css'));
-});
+
+
 
 gulp.task('lint', function() {
   return gulp.src(config.paths.js)
