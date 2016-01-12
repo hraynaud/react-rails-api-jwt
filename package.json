@@ -38,6 +38,10 @@
   },
   "devDependencies": {
     "glob": "^6.0.3",
-    "gulp-streamify": "^1.0.2"
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.5.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
