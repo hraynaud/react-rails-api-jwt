@@ -1,2 +1,2 @@
-var Parent = require('./jsx/parent');
-React.render(<Parent />, document.getElementById('app'));
+var Parent = require('./Parent');
+ReactDOM.render(<Parent />, document.getElementById('app'));

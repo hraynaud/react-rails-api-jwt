@@ -1,4 +1,4 @@
-var Child = require('./jsx/child');
+var Child = require('./Child');
 var Parent = React.createClass({
   render: function(){
     return (
@@ -9,3 +9,4 @@ var Parent = React.createClass({
     )
   }
 });
+module.exports = Parent;

@@ -1,4 +1,3 @@
-
 var Child = React.createClass({
   render: function(){
     return (
@@ -8,3 +7,5 @@ var Child = React.createClass({
     )
   }
 });
+
+module.exports = Child;
