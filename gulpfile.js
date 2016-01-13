@@ -20,7 +20,7 @@ var path = {
 };
 
 var sassConfig = {
-    includePaths: ['bower_components/foundation/scss/'],
+    includePaths: ['bower_components/foundation/scss'],
     outputStyle: 'expanded',
     errLogToConsole: true
 };
@@ -34,7 +34,7 @@ gulp.task('styles', function(){
 
   return gulp.src('src/scss/app.scss')
   .pipe(sass({
-    includePaths: [ './bower_components/foundation-sites/assets', './bower_components/foundation-sites/scss'],
+    includePaths: [ './bower_components/foundation-sites/scss'],
   }))
     .pipe(concat("app.css"))
     .pipe(gulp.dest("dist/dev/css"));
